@@ -1,0 +1,859 @@
+/* ============================================
+   CSS RESET & BASE STYLES
+   ============================================ */
+/* This resets default browser styles for consistency across different browsers */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Makes padding and border included in element's total width/height */
+}
+
+/* Root variables for colors and spacing */
+/* These make it easy to change the theme colors throughout the site */
+:root {
+    --primary-color: #6366f1;      /* Main brand color (indigo) */
+    --secondary-color: #8b5cf6;    /* Secondary accent color (purple) */
+    --text-dark: #1f2937;          /* Dark text color */
+    --text-light: #6b7280;         /* Light text color */
+    --bg-light: #f9fafb;           /* Light background */
+    --bg-white: #ffffff;           /* White background */
+    --border-color: #e5e7eb;       /* Border color */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Base body styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;              /* Makes text more readable */
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+    overflow-x: hidden;            /* Prevents horizontal scrolling */
+    word-wrap: break-word;         /* Breaks long words if needed */
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+/* Container limits the width and centers content */
+.container {
+    max-width: 1200px;             /* Maximum width of content */
+    margin: 0 auto;                /* Centers the container */
+    padding: 0 20px;               /* Adds padding on left and right */
+}
+
+/* Mobile-first: Better padding on small screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;           /* Tighter padding on very small screens */
+    }
+}
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
+.header {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+    position: fixed;                /* Stays at top when scrolling */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;                  /* Ensures header stays above other content */
+    padding: 1rem 0;
+}
+
+.header .container {
+    display: flex;                  /* Flexbox for horizontal layout */
+    justify-content: space-between; /* Space between logo and nav */
+    align-items: center;            /* Vertically centers items */
+    position: relative;             /* Needed for absolute positioning of mobile menu */
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Navigation list */
+.nav-list {
+    display: flex;                  /* Horizontal list */
+    list-style: none;               /* Removes bullet points */
+    gap: 2rem;                      /* Space between menu items */
+}
+
+.nav-link {
+    text-decoration: none;           /* Removes underline */
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 1rem;                /* Ensure readable font size */
+    transition: color 0.3s ease;    /* Smooth color change on hover */
+    padding: 0.5rem 0;              /* Add padding for better touch targets */
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Mobile menu button (hidden on desktop) */
+.mobile-menu-btn {
+    display: none;                  /* Hidden by default */
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 5px;
+    padding: 8px;                   /* Better touch target */
+    z-index: 1001;                  /* Above nav menu */
+}
+
+.mobile-menu-btn span {
+    width: 28px;                    /* Slightly larger for better touch */
+    height: 3px;
+    background-color: var(--text-dark);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Hamburger animation when menu is open */
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+/* The main banner area at the top */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 150px 0 100px;         /* Top padding accounts for fixed header */
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 10px;                /* Extra padding for mobile */
+}
+
+.hero-title {
+    font-size: 3rem;                /* Large, attention-grabbing title */
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;               /* Better line height for readability */
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;                /* Wraps buttons on small screens */
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    display: inline-block;
+    padding: 14px 32px;            /* Increased padding for better touch targets */
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;               /* Ensure readable font size */
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    min-height: 48px;               /* Minimum touch target size (accessibility) */
+    display: inline-flex;           /* Better alignment */
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);    /* Slight lift on hover */
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+/* Common styles for all main sections */
+section {
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 0 10px;                /* Extra padding for mobile */
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    line-height: 1.2;              /* Better line height */
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;             /* Better readability */
+}
+
+/* ============================================
+   FEATURES SECTION
+   ============================================ */
+.features {
+    background-color: var(--bg-light);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem;
+}
+
+.feature-card {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    min-height: 100%;             /* Ensures equal height cards */
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);    /* Lifts card on hover */
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    line-height: 1.3;
+}
+
+.feature-description {
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: 1rem;              /* Ensure minimum readable size */
+}
+
+/* ============================================
+   TESTIMONIALS SECTION
+   ============================================ */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+    min-height: 100%;             /* Ensures equal height cards */
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-size: 1rem;              /* Ensure readable font size */
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;             /* Makes it circular */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.author-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.author-role {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   PRICING SECTION
+   ============================================ */
+.pricing {
+    background-color: var(--bg-light);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 100%;             /* Ensures equal height cards */
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);         /* Makes featured card slightly larger */
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.pricing-header {
+    margin-bottom: 2rem;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.price-amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.price-period {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.plan-features li {
+    padding: 0.75rem 0;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.plan-features li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background-color: var(--text-dark);
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+}
+
+.footer-heading {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN (MOBILE-FRIENDLY)
+   ============================================ */
+/* Mobile-first approach: Styles for tablets and below (768px and less) */
+
+@media (max-width: 768px) {
+    /* ============================================
+       HEADER & NAVIGATION - MOBILE
+       ============================================ */
+    /* Show mobile menu button */
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    /* Hide navigation list by default on mobile */
+    .nav-list {
+        display: none;
+        position: absolute;
+        top: calc(100% + 1rem);    /* Position below header with gap */
+        left: 20px;                /* Match container padding */
+        right: 20px;
+        background-color: var(--bg-white);
+        flex-direction: column;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-lg);
+        gap: 0;
+        border-radius: 12px;
+        max-height: calc(100vh - 100px); /* Prevent overflow */
+        overflow-y: auto;          /* Allow scrolling if menu is too long */
+    }
+    
+    /* Show nav when active class is added */
+    .nav-list.active {
+        display: flex;
+    }
+    
+    .nav-list li {
+        padding: 1rem 0;           /* Better touch targets */
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;         /* Larger text for mobile */
+        padding: 0.75rem 0;
+        display: block;            /* Full width clickable area */
+    }
+    
+    /* Logo size adjustment */
+    .logo h1 {
+        font-size: 1.25rem;        /* Slightly smaller on mobile */
+    }
+    
+    /* ============================================
+       HERO SECTION - MOBILE
+       ============================================ */
+    .hero {
+        padding: 120px 0 60px;     /* Reduced padding for mobile */
+    }
+    
+    .hero-content {
+        padding: 0 5px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.75rem;
+        line-height: 1.7;
+        padding: 0 10px;
+    }
+    
+    /* Stack buttons vertically on mobile */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 0 10px;
+    }
+    
+    .btn {
+        width: 100%;               /* Full width buttons on mobile */
+        text-align: center;
+        padding: 16px 24px;        /* Larger touch targets */
+    }
+    
+    /* ============================================
+       SECTIONS - MOBILE
+       ============================================ */
+    section {
+        padding: 60px 0;          /* Reduced section padding */
+    }
+    
+    .section-header {
+        margin-bottom: 3rem;
+        padding: 0 5px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.2;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 0 10px;
+    }
+    
+    /* ============================================
+       FEATURES - MOBILE
+       ============================================ */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;              /* Smaller gap on mobile */
+    }
+    
+    .feature-card {
+        padding: 1.75rem;
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;        /* Slightly smaller icons */
+        margin-bottom: 0.75rem;
+    }
+    
+    .feature-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .feature-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    /* ============================================
+       TESTIMONIALS - MOBILE
+       ============================================ */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.75rem;
+    }
+    
+    .testimonial-text {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.6;
+    }
+    
+    .author-avatar {
+        width: 45px;
+        height: 45px;
+        font-size: 0.9rem;
+    }
+    
+    .author-name {
+        font-size: 1rem;
+    }
+    
+    .author-role {
+        font-size: 0.85rem;
+    }
+    
+    /* ============================================
+       PRICING - MOBILE
+       ============================================ */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-card {
+        padding: 2rem 1.75rem;    /* Slightly less padding */
+    }
+    
+    /* Make featured pricing card same size as others on mobile */
+    .pricing-card.featured {
+        transform: scale(1);
+        border-width: 2px;
+    }
+    
+    .popular-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.9rem;
+    }
+    
+    .plan-name {
+        font-size: 1.35rem;
+    }
+    
+    .price-amount {
+        font-size: 2.5rem;        /* Smaller price on mobile */
+    }
+    
+    .plan-features {
+        margin-bottom: 1.5rem;
+    }
+    
+    .plan-features li {
+        padding: 0.65rem 0;
+        font-size: 0.95rem;
+    }
+    
+    /* ============================================
+       FOOTER - MOBILE
+       ============================================ */
+    .footer {
+        padding: 50px 0 20px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;       /* Center align on mobile */
+    }
+    
+    .footer-section {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-title {
+        font-size: 1.35rem;
+    }
+    
+    .footer-heading {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .footer-links {
+        font-size: 0.95rem;
+    }
+    
+    .footer-links li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer-bottom {
+        font-size: 0.9rem;
+        padding-top: 1.5rem;
+    }
+}
+
+/* ============================================
+   EXTRA SMALL SCREENS (phones in portrait)
+   ============================================ */
+@media (max-width: 480px) {
+    /* Even tighter spacing for very small screens */
+    .container {
+        padding: 0 16px;
+    }
+    
+    .header {
+        padding: 0.875rem 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.15rem;
+    }
+    
+    .hero {
+        padding: 110px 0 50px;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    section {
+        padding: 50px 0;
+    }
+    
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .feature-card,
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .pricing-card {
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .price-amount {
+        font-size: 2.25rem;
+    }
+    
+    .nav-list {
+        left: 16px;
+        right: 16px;
+        padding: 1.25rem;
+    }
+}
+
+/* ============================================
+   TABLET LANDSCAPE (between 769px and 1024px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Adjust grid columns for tablets */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Slightly reduce padding */
+    section {
+        padding: 70px 0;
+    }
+}
+
